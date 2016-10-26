@@ -1,0 +1,127 @@
+<div ng-include="'templates/header.html'"></div>
+<div class="taskBoardPage" style="background:{{taskModel.boardBackground}}">
+	<div class="boardHeading">
+		TestBoard
+		<a href="javascript:void(0)" class="pull-right" ng-click="showSidePanel()">Show Menu</a>
+	</div>
+	<div class="taskBoard" ng-mousemove="moveTaskCard($event)">
+		<div ng-repeat="list in taskModel.boardList" class="taskBoardList">
+			<div class="listHeading">
+				<textarea class="form-control">{{list.title}}</textarea>
+				<a href="javascript:void(0)" class="pull-right" ng-click="showEditListMenu($index)">
+					<i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+				</a>
+				<div class="editListMenu" ng-show="list.showEditList">
+					<div class="editListHeading text-center">
+						List Actions
+						<a href="javascript:void(0)" class="pull-right" ng-click="closeEditListMenu($index)"></a>
+					</div>
+					<div class="editListContent">
+						<a href="javascript:void(0)" ng-click="archiveList($index)">Archive this List</a>
+					</div>
+				</div>
+			</div>
+			<div ng-repeat="task in list.tasks" class="taskCardList">
+				<div class="taskCardItem" ng-click="viewTaskDetails($index, $parent.$index)" data-toggle="modal" data-target="#taskDetailsModal" ng-mousedown="selectTaskShift($index, $parent.$index, $event)" ng-mouseup="unselectTaskShift()">
+					{{task.title}}
+				</div>
+			</div>
+			<div class="addTaskBox">
+				<a href="javascript:void(0)" ng-click="showAddTaskForm($index)" class="addTaskBtn" ng-show="!list.showAddTask">Add a card</a>
+				<div class="addTaskForm" ng-show="list.showAddTask">
+					<textarea type="text" ng-model="taskModel.newTaskName" class="form-control"></textarea>
+					<button ng-click="addNewTask($index)" class="btn btn-success">Save</button>
+					<a href="javascript:void(0)" ng-click="closeAddTaskForm($index)" class="closeTaskForm"></a>
+				</div>
+			</div>
+		</div>
+		<div class="addListBox">
+			<a href="javascript:void(0)" ng-click="showAddListForm()" class="addListBtn">Add a list...</a>
+			<div class="addListForm" ng-show="taskModel.addListForm">
+				<input type="text" ng-model="taskModel.newListName" class="form-control" placeholder="Add a List...">
+				<button ng-click="addNewList()" class="btn btn-success">Save</button>
+				<a href="javascript:void(0)" ng-click="closeAddListForm()" class="closeListForm"></a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sideMenu" ng-class="{'hideSideMenu' : !taskModel.showSideMenu}">
+	<div class="sideMenuHeader text-center">
+		<a href="javascript:void(0)" class="sideMenuLeft" ng-show="taskModel.sideMenuTitle != 'Menu'" ng-click="taskModel.sideMenuTitle = 'Menu'">
+			<i class="fa fa-arrow-left" aria-hidden="true"></i>
+		</a>
+		{{taskModel.sideMenuTitle}}
+		<a href="javascript:void(0)" class="pull-right closeSideMenu" ng-click="closeSidePanel()"></a>
+	</div>
+	<div class="sideMenuContent">
+		<div ng-show="taskModel.sideMenuTitle == 'Menu'" class="defaultSideMenu">
+			<ul class="list-unstyled">
+				<li>
+					<a href="javascript:void(0)" ng-click="taskModel.sideMenuTitle = 'Change Background'"><span class="changeBackgroundBtn" style="background:{{taskModel.boardBackground}}"></span>Change Background</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" ng-click="taskModel.sideMenuTitle = 'Activity'">
+						<i class="fa fa-list-ul" aria-hidden="true"></i>Activity
+					</a>
+					<ul class="list-unstyled">
+						<li ng-repeat="activity in taskModel.userActivityLog | orderBy: $index : true ">
+							<p>{{activity.title}}</p>
+							{{modifyTime(activity.time)}}
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div ng-show="taskModel.sideMenuTitle == 'Change Background'" class="changeBackgroundMenu">
+			<ul class="list-unstyled">
+				<li ng-repeat="color in taskModel.backgroundColorList">
+					<a href="javascript:void(0)" ng-click='changeBackground(color)' style="background:{{color}}"></a>
+				</li>
+			</ul>
+		</div>
+		<div ng-show="taskModel.sideMenuTitle == 'Activity'">
+			<ul class="list-unstyled">
+				<li ng-repeat="activity in taskModel.userActivityLog | orderBy: $index : true">
+					<p>{{activity.title}}</p>
+					{{modifyTime(activity.time)}}
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="taskDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="myModalLabel">
+        			<input ng-model="taskModel.boardList[currentListIndex].tasks[currentTaskIndex].title" class="form-control">
+        			<span>in list {{taskModel.boardList[currentListIndex].title}}</span>
+        		</h4>
+      		</div>
+      		<div class="modal-body">
+        		<a href="javascript:void(0)" ng-click="showEditTaskDescription()" class="editDescBtn" ng-show="!taskModel.showEditTaskDesc && !taskModel.boardList[currentListIndex].tasks[currentTaskIndex].description">
+        			<i class="fa fa-list-ul" aria-hidden="true"></i>
+        			Edit the description
+        		</a>
+        		<div class="descriptionBox" ng-if="taskModel.boardList[currentListIndex].tasks[currentTaskIndex].description">
+        			Description <a href="javascript:void(0)" ng-click="showEditTaskDescription()" ng-show="!taskModel.showEditTaskDesc">Edit</a>
+        			<p ng-show="!taskModel.showEditTaskDesc">{{taskModel.boardList[currentListIndex].tasks[currentTaskIndex].description}}</p>
+        		</div>
+        		<div class="editTaskDescriptionBox" ng-show="taskModel.showEditTaskDesc">
+        			<textarea class="form-control" ng-model="taskModel.newTaskDescription"></textarea>
+        			<button class="btn btn-success" ng-click="updateTaskDescription()">Save</button>
+        			<a href="javascript:void(0)" ng-click="closeEditTaskDescription()">
+        				<i class="fa fa-times" aria-hidden="true"></i>
+        			</a>
+        		</div>
+        		<a href="javascript:void(0)" ng-click="archiveTask()" class="archiveTaskBtn" data-dismiss="modal" aria-label="Close">	
+        			<i class="fa fa-trash-o" aria-hidden="true"></i>
+        			Archive
+        		</a>
+      		</div>
+    	</div>
+  	</div>
+</div>

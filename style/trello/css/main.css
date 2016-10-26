@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,600,600i');
+@import "../../outer/bootstrap.min.css";
+@import "../../outer/font-awesome.min.css";
+body {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px;
+}
+header {
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 24px;
+  font-weight: 600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  color: #ffffff;
+  font-style: italic;
+}
+.taskBoardPage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 50px;
+  z-index: 1;
+}
+.taskBoardPage .boardHeading {
+  padding: 12px;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}
+.taskBoardPage .boardHeading a {
+  color: #ffffff;
+  display: inline-block;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.taskBoardPage .boardHeading a:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+.taskBoardPage .taskBoard {
+  padding: 12px;
+  height: calc(100vh - 104px);
+}
+.taskBoardPage .taskBoard .addListBox {
+  width: 270px;
+  position: relative;
+  float: left;
+}
+.taskBoardPage .taskBoard .addListBox .addListBtn {
+  background: rgba(0, 0, 0, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  padding: 10px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.taskBoardPage .taskBoard .addListBox .addListBtn:hover {
+  color: #ffffff;
+}
+.taskBoardPage .taskBoard .addListBox .addListForm {
+  position: absolute;
+  top: 0;
+  background: #E2E4E6;
+  padding: 4px;
+  border-radius: 3px;
+  width: 100%;
+}
+.taskBoardPage .taskBoard .addListBox .addListForm input {
+  width: 100%;
+  margin-bottom: 4px;
+}
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 14px;
+}
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm:before,
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm:after {
+  content: '';
+  height: 18px;
+  width: 2px;
+  display: inline-block;
+  background: #999;
+  position: absolute;
+  top: 3px;
+}
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm:after {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm:hover:before,
+.taskBoardPage .taskBoard .addListBox .addListForm .closeListForm:hover:after {
+  background: #333;
+}
+.taskBoardPage .taskBoard .taskBoardList {
+  width: 270px;
+  margin-right: 10px;
+  float: left;
+  background: #E2E4E6;
+  padding: 4px;
+  border-radius: 3px;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading {
+  position: relative;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading textarea {
+  width: calc(78%);
+  resize: none;
+  border: none;
+  background: transparent;
+  height: 34px;
+  font-weight: 600;
+  overflow: hidden;
+  word-wrap: break-word;
+  display: inline-block;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading textarea:focus {
+  background: #ffffff;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading > a {
+  display: inline-block;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 3px;
+  margin-top: 4px;
+  color: #999;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading > a:hover {
+  background: #D6DADC;
+  color: #4d4d4d;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu {
+  background: #ffffff;
+  position: absolute;
+  left: calc(100% - 22px);
+  z-index: 2;
+  width: 270px;
+  border-radius: 3px;
+  border: 1px solid #D6DADC;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading {
+  border-bottom: 1px solid #999;
+  padding: 8px;
+  line-height: 24px;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 14px;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a:before,
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a:after {
+  content: '';
+  height: 18px;
+  width: 2px;
+  display: inline-block;
+  background: #999;
+  position: absolute;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a:after {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a:hover:before,
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListHeading a:hover:after {
+  background: #333;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListContent a {
+  display: block;
+  padding: 8px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+}
+.taskBoardPage .taskBoard .taskBoardList .listHeading .editListMenu .editListContent a:hover {
+  background: #298FCA;
+  color: #ffffff;
+}
+.taskBoardPage .taskBoard .taskBoardList .taskCardList .taskCardItem {
+  padding: 6px 12px;
+  border-radius: 3px;
+  background: #ffffff;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+.taskBoardPage .taskBoard .taskBoardList .taskCardList .taskCardItem:hover {
+  background: #EDEFF0;
+  cursor: pointer;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox {
+  position: relative;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskBtn {
+  padding: 8px 10px;
+  color: #8c8c8c;
+  text-decoration: none;
+  display: block;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskBtn:hover {
+  color: #4d4d4d;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm {
+  background: #E2E4E6;
+  padding: 4px 0;
+  border-radius: 3px;
+  width: 100%;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm textarea {
+  margin-bottom: 4px;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 14px;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm:before,
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm:after {
+  content: '';
+  height: 18px;
+  width: 2px;
+  display: inline-block;
+  background: #999;
+  position: absolute;
+  top: 3px;
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm:after {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm:hover:before,
+.taskBoardPage .taskBoard .taskBoardList .addTaskBox .addTaskForm .closeTaskForm:hover:after {
+  background: #333;
+}
+.sideMenu {
+  background: #EDEFF0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 50px;
+  right: 0;
+  width: 350px;
+  bottom: 0;
+  z-index: 2;
+  padding: 12px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.sideMenu.hideSideMenu {
+  right: -350px;
+}
+.sideMenu .sideMenuHeader {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.sideMenu .sideMenuHeader a {
+  display: inline-block;
+}
+.sideMenu .sideMenuHeader a.sideMenuLeft {
+  color: #999;
+  float: left;
+}
+.sideMenu .sideMenuHeader a.sideMenuLeft:hover {
+  color: #333;
+  font-size: 18px;
+  line-height: 24px;
+}
+.sideMenu .sideMenuHeader a.closeSideMenu {
+  height: 24px;
+  width: 24px;
+  position: relative;
+}
+.sideMenu .sideMenuHeader a.closeSideMenu:before,
+.sideMenu .sideMenuHeader a.closeSideMenu:after {
+  content: '';
+  height: 18px;
+  width: 2px;
+  display: inline-block;
+  background: #999;
+  position: absolute;
+  top: 3px;
+}
+.sideMenu .sideMenuHeader a.closeSideMenu:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.sideMenu .sideMenuHeader a.closeSideMenu:after {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+.sideMenu .sideMenuHeader a.closeSideMenu:hover:before,
+.sideMenu .sideMenuHeader a.closeSideMenu:hover:after {
+  background: #333;
+}
+.sideMenu .sideMenuContent {
+  margin-top: 12px;
+  border-top: 1px solid #999;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li {
+  padding: 5px 0;
+  border-top: 1px solid #999;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li:first-child {
+  border-top: none;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > a {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  display: block;
+  text-decoration: none;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > a span.changeBackgroundBtn {
+  height: 20px;
+  width: 20px;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > a:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > a i {
+  margin-right: 8px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > ul {
+  margin-top: 10px;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > ul > li {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.sideMenu .sideMenuContent .defaultSideMenu > ul > li > ul > li p {
+  margin: 0;
+  font-size: 14px;
+}
+.sideMenu .sideMenuContent .changeBackgroundMenu ul li {
+  display: inline-block;
+  width: 30%;
+  margin-right: 5%;
+}
+.sideMenu .sideMenuContent .changeBackgroundMenu ul li:nth-child(3n) {
+  margin-right: 0;
+}
+.sideMenu .sideMenuContent .changeBackgroundMenu ul li a {
+  display: block;
+  height: 60px;
+  margin-top: 10px;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+.sideMenu .sideMenuContent .changeBackgroundMenu ul li a:hover {
+  opacity: 1.0;
+}
+.modal .modal-dialog .modal-content .modal-header .modal-title input {
+  border: none;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 0;
+}
+.modal .modal-dialog .modal-content .modal-header .modal-title span {
+  font-size: 14px;
+  font-weight: normal;
+}
+.modal .modal-dialog .modal-content .modal-body .editDescBtn,
+.modal .modal-dialog .modal-content .modal-body .archiveTaskBtn {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #333;
+  text-decoration: none;
+}
+.modal .modal-dialog .modal-content .modal-body .editDescBtn:hover,
+.modal .modal-dialog .modal-content .modal-body .archiveTaskBtn:hover {
+  background: #EDEFF0;
+}
+.modal .modal-dialog .modal-content .modal-body .editTaskDescriptionBox textarea {
+  margin-bottom: 10px;
+}
+.modal .modal-dialog .modal-content .modal-body .editTaskDescriptionBox a {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #999;
+}
