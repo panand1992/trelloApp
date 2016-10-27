@@ -85,6 +85,7 @@ app.controller('AppCtrl', function($scope , TaskModel){
 	}
 
 	$scope.selectTaskShift = function(taskIndex, listIndex, event){
+		$scope.closeAddTaskForm();
 		tm.currentTaskShiftData.taskIndex = taskIndex;
 		tm.currentTaskShiftData.listIndex = listIndex;
 		tm.cardSelectedShift = true;
@@ -109,8 +110,8 @@ app.controller('AppCtrl', function($scope , TaskModel){
 			var checkXPosI = tm.boardList[i].left + 4;
 			var checkXPosF = tm.boardList[i].left + tm.boardList[i].width - 4;
 			var checkYPosI = tm.boardList[i].top + 43;
-			var checkYPosF = tm.boardList[i].top + tm.boardList[i].height - 104;
-			if(xpos > checkXPosI && xpos < checkXPosF && ypos < checkYPosF && ypos > checkYPosI){
+			var checkYPosF = tm.boardList[i].top + tm.boardList[i].height - 40;
+			if((xpos > checkXPosI && xpos < checkXPosF) && ((ypos < checkYPosF && ypos > checkYPosI) || (tm.boardList[i].height == 83))){
 				tm.dragTaskOnTo = i;
 				break;
 			}

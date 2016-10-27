@@ -220,10 +220,15 @@ header {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 5px;
+  width: 262px;
 }
-.taskBoardPage .taskBoard .taskBoardList .taskCardList .taskCardItem:hover {
+.taskBoardPage .taskBoard .taskBoardList .taskCardList .taskCardItem:hover,
+.taskBoardPage .taskBoard .taskBoardList .taskCardList .taskCardItem.selected {
   background: #EDEFF0;
   cursor: pointer;
+}
+.taskBoardPage .taskBoard .taskBoardList .taskCardList .taskCardItem.selected {
+  z-index: 5;
 }
 .taskBoardPage .taskBoard .taskBoardList .addTaskBox {
   position: relative;
