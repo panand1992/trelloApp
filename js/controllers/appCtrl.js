@@ -90,10 +90,44 @@ app.controller('AppCtrl', function($scope , TaskModel){
 		tm.cardSelectedShift = true;
 		var xpos = event.clientX;
 		var ypos = event.clientY;
-		console.log(xpos + ", " + ypos);
+		var selectedTask = document.getElementById("task"+taskIndex+"List"+listIndex);
+		tm.initialYposDrag = event.clientY - selectedTask.offsetTop;
+		tm.initialXposDrag = event.clientX - selectedTask.offsetLeft;
+		for(var i=0;i<tm.boardList.length;i++){
+			var selectedList = document.getElementById("listBox"+i);
+			tm.boardList[i].top = selectedList.offsetTop;
+			tm.boardList[i].left = selectedList.offsetLeft;
+			tm.boardList[i].height = selectedList.offsetHeight;
+			tm.boardList[i].width = selectedList.offsetWidth;
+		}
 	}
 
-	$scope.unselectTaskShift = function(){
+	$scope.unselectTaskShift = function(event){
+		var xpos = event.clientX;
+		var ypos = event.clientY;
+		for(var i=0;i<tm.boardList.length;i++){
+			var checkXPosI = tm.boardList[i].left + 4;
+			var checkXPosF = tm.boardList[i].left + tm.boardList[i].width - 4;
+			var checkYPosI = tm.boardList[i].top + 43;
+			var checkYPosF = tm.boardList[i].top + tm.boardList[i].height - 104;
+			if(xpos > checkXPosI && xpos < checkXPosF && ypos < checkYPosF && ypos > checkYPosI){
+				tm.dragTaskOnTo = i;
+				break;
+			}
+		}
+		console.log(tm.dragTaskOnTo);
+		if(tm.dragTaskOnTo == tm.currentTaskShiftData.listIndex && tm.dragTaskOnTo == null){
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex].style.position = "relative";
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex].style.top = 0;
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex].style.left = 0;
+		}
+		else{
+			tm.boardList[tm.dragTaskOnTo].tasks.splice(0, 0, tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex]);
+			tm.boardList[tm.dragTaskOnTo].tasks[0].style.position = "relative";
+			tm.boardList[tm.dragTaskOnTo].tasks[0].style.top = 0;
+			tm.boardList[tm.dragTaskOnTo].tasks[0].style.left = 0;
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks.splice(tm.currentTaskShiftData.taskIndex, 1);
+		}
 		tm.currentTaskShiftData.taskIndex = null;
 		tm.currentTaskShiftData.listIndex = null;
 		tm.cardSelectedShift = false;
@@ -103,8 +137,9 @@ app.controller('AppCtrl', function($scope , TaskModel){
 		if(tm.cardSelectedShift){
 			var xpos = event.clientX;
 			var ypos = event.clientY;
-			console.log(xpos + ", " + ypos);
-			$(".taskBoardList:nth-child("+(tm.currentTaskShiftData.listIndex+1)+") .taskCardList:nth-child("+(tm.currentTaskShiftData.taskIndex+1)+")").addClass("selectedCardItem");
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex].style.position = "fixed";
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex].style.left = (xpos - tm.initialXposDrag) + "px";
+			tm.boardList[tm.currentTaskShiftData.listIndex].tasks[tm.currentTaskShiftData.taskIndex].style.top = (ypos - tm.initialYposDrag) + "px";
 		}
 	}
 

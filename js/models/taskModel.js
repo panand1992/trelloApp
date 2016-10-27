@@ -16,6 +16,9 @@ app.factory('TaskModel', function (taskConfig) {
         this.newTaskDescription = defaults.newTaskDescription;
         this.currentTaskShiftData = defaults.currentTaskShiftData;
         this.cardSelectedShift = defaults.cardSelectedShift;
+        this.initialXposDrag  = defaults.initialXposDrag;
+        this.initialYposDrag  = defaults.initialYposDrag; 
+        this.dragTaskOnTo = defaults.dragTaskOnTo;
     }
 
     TaskModel.prototype = (function () {
@@ -26,7 +29,11 @@ app.factory('TaskModel', function (taskConfig) {
                     "title" : this.newListName,
                     "tasks" : [],
                     "showAddTask" : false,
-                    "showEditList" : false
+                    "showEditList" : false,
+                    "height" : 0,
+                    "width" : 0,
+                    "top" : 0,
+                    "left" : 0
                 };
                 this.boardList.push(newTaskList);
                 this.userActivityLog.push({
@@ -42,7 +49,12 @@ app.factory('TaskModel', function (taskConfig) {
                 var newTask = {
                     "title" : this.newTaskName,
                     "description" : null,
-                    "activityList" : []
+                    "activityList" : [],
+                    "style" : {
+                        'position' : 'relative',
+                        'top' : 0,
+                        'left' : 0
+                    }
                 }
                 this.boardList[val].tasks.push(newTask);
                 this.userActivityLog.push({

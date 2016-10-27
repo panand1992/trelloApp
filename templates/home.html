@@ -5,7 +5,7 @@
 		<a href="javascript:void(0)" class="pull-right" ng-click="showSidePanel()">Show Menu</a>
 	</div>
 	<div class="taskBoard" ng-mousemove="moveTaskCard($event)">
-		<div ng-repeat="list in taskModel.boardList" class="taskBoardList">
+		<div ng-repeat="list in taskModel.boardList" class="taskBoardList" id="listBox{{$index}}">
 			<div class="listHeading">
 				<textarea class="form-control">{{list.title}}</textarea>
 				<a href="javascript:void(0)" class="pull-right" ng-click="showEditListMenu($index)">
@@ -21,8 +21,8 @@
 					</div>
 				</div>
 			</div>
-			<div ng-repeat="task in list.tasks" class="taskCardList">
-				<div class="taskCardItem" ng-click="viewTaskDetails($index, $parent.$index)" data-toggle="modal" data-target="#taskDetailsModal" ng-mousedown="selectTaskShift($index, $parent.$index, $event)" ng-mouseup="unselectTaskShift()">
+			<div ng-repeat="task in list.tasks" class="taskCardList" id="task{{$index}}List{{$parent.$index}}">
+				<div class="taskCardItem" ng-class="{'selected' : taskModel.currentTaskShiftData.taskIndex == $index && taskModel.currentTaskShiftData.listIndex == $parent.$index}" ng-click="viewTaskDetails($index, $parent.$index)" data-toggle="modal" data-target="#taskDetailsModal" ng-mousedown="selectTaskShift($index, $parent.$index, $event)" ng-mouseup="unselectTaskShift($event)" ng-style="task.style">
 					{{task.title}}
 				</div>
 			</div>

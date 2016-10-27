@@ -15,6 +15,9 @@ app.factory('taskConfig', function () {
             "taskIndex" : null,
             "listIndex" : null
         },
-        cardSelectedShift : false
+        cardSelectedShift : false,
+        initialXposDrag : 0,
+        initialYposDrag : 0,
+        dragTaskOnTo : null
     }  
 });

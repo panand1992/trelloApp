@@ -184,9 +184,13 @@
 					font-size: 14px;
 					line-height: 24px;
 					margin-bottom: 5px;
-					&:hover{
+					width: 262px;
+					&:hover, &.selected{
 						background:#EDEFF0;
 						cursor: pointer;
+					}
+					&.selected{
+						z-index: 5;
 					}
 				}
 			}
