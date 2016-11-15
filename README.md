@@ -5,3 +5,5 @@
 3. bootstrap for basic design framework
 4. default values for all variables used in the controller is defined in a service call taskConfig.js.
 5. Most of the programming logic is defined in taskModel
+
+project-url : https://panand1992.github.io/trelloApp
